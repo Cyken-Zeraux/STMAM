@@ -2,10 +2,8 @@
 require('../vendor/autoload.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-@apache_setenv('no-gzip', 1);
-@ini_set('zlib.output_compression', 0);
-@ini_set('output_buffering', 0);
-@ini_set('implicit_flush', 1);
+ini_set('zlib.output_compression', 0);
+ini_set('output_buffering', 0);
 set_time_limit(0);
 require_once(dirname(__FILE__)."/rollingcurlx.class.php");
 $time_start = microtime(true);
@@ -84,6 +82,5 @@ $time_end = microtime(true);
 $time = round($time_end - $time_start, 4);
 echo 'Errors: ', $GLOBALS['y'], '<br>';
 echo "$time seconds\n";
-ob_implicit_flush(1);
 ob_end_flush();
 ?>
