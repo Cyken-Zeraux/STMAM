@@ -51,7 +51,7 @@ class queque {
             //print_r($this->setoptions);
             if ($this->preiterate >= 500 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
-                echo str_pad('',4096)."Executing queue $i";
+                echo str_pad('',20000)."Executing queue $i";
                 ob_flush();
                 flush();
                 //RCX is blocking during execution.
