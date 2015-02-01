@@ -49,7 +49,7 @@ class queque {
             $xURL = "www.$chunkplode[1]";
             $this->RCX->addRequest($xURL, $this->setpost_data, 'callback_functn', $this->setuser_data, $this->setoptions);
             //print_r($this->setoptions);
-            if ($this->preiterate >= 500 || $i >= $this->setiteratethrough - 1) {
+            if ($this->preiterate >= 1000 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
                 echo str_pad('',20000)."Executing queue $i";
                 ob_flush();
@@ -68,13 +68,12 @@ class queque {
 }
 $header[] = 'Accept: text/html';
 $header[] = "Accept-Encoding: gzip";
-$RCque = new queque("top-1m.csv", 1000, 12000, $header); //($file, $iterate, $timeout)
+$RCque = new queque("top-1m.csv", 10000, 14000, $header); //($file, $iterate, $timeout)
 $timeouty = 50000;
 $RCque->setuser_data = ['foo', 'bar'];
 $RCque->agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36';
-$RCque->setoptions = [CURLOPT_TIMEOUT_MS => 5000, CURLOPT_CONNECTTIMEOUT => 0, CURLOPT_VERBOSE => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_REFERER => true, CURLOPT_SSL_VERIFYPEER => 0, CURLOPT_SSL_VERIFYHOST => 0];
+$RCque->setoptions = [CURLOPT_CONNECTTIMEOUT => 0, CURLOPT_VERBOSE => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_REFERER => true, CURLOPT_SSL_VERIFYPEER => 0, CURLOPT_SSL_VERIFYHOST => 0];
 $RCque->requestcsv();
-
 
 
 $time_end = microtime(true);
