@@ -50,7 +50,7 @@ class queque {
             $xURL = "www.$chunkplode[1]";
             $this->RCX->addRequest($xURL, $this->setpost_data, 'callback_functn', $this->setuser_data, $this->setoptions);
             //print_r($this->setoptions);
-            if ($this->preiterate >= 1000 || $i >= $this->setiteratethrough - 1) {
+            if ($this->preiterate >= 250 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
                 echo str_pad('',8096)."Executing queue $i --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
                 flush();
