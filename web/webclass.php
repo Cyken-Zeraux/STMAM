@@ -6,6 +6,8 @@ set_time_limit(0);
 require_once(dirname(__FILE__)."/rollingcurlx.class.php");
 $time_start = microtime(true);
 
+echo str_pad('',4096)."\n";
+
 $y = 0;
 //Currently used as printer, will store data in future.
 function callback_functn($response, $url, $request_info, $user_data, $time) {
@@ -49,6 +51,7 @@ class queque {
             if ($this->preiterate >= 500 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
                 echo "Executing queue $i";
+                ob_flush();
                 flush();
                 //RCX is blocking during execution.
                 $this->RCX->execute();
@@ -77,4 +80,5 @@ $time_end = microtime(true);
 $time = round($time_end - $time_start, 4);
 echo 'Errors: ', $GLOBALS['y'], '<br>';
 echo "$time seconds\n";
+ob_end_flush();
 ?>
