@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 set_time_limit(0);
 require_once(dirname(__FILE__)."/rollingcurlx.class.php");
 $time_start = microtime(true);
-while (ob_get_level()) ob_end_flush();
 
 $y = 0;
 //Currently used as printer, will store data in future.
