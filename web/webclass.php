@@ -20,7 +20,7 @@ function callback_functn($response, $url, $request_info, $user_data, $time) {
 }
 
 class queque {
-    var $loadhandle = 250;
+    var $loadhandle = 1200;
     var $preiterate = 0;
     var $chunk_size = 128;
     var $agent = NULL;
@@ -51,8 +51,7 @@ class queque {
             //print_r($this->setoptions);
             if ($this->preiterate >= 1000 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
-                echo str_pad('',20000)."Executing queue $i";
-                ob_flush();
+                echo str_pad('',8096)."Executing queue $i --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
                 flush();
                 //RCX is blocking during execution.
                 $this->RCX->execute();
