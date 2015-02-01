@@ -1,4 +1,9 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
+header("Cache-Control: no-cache, must-revalidate");
+header("Pragma: no-cache"); 
+header("Expires: Mon, 24 Sep 2012 04:00:00 GMT");
+
 require('../vendor/autoload.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -8,12 +13,12 @@ set_time_limit(0);
 require_once(dirname(__FILE__)."/rollingcurlx.class.php");
 $time_start = microtime(true);
 
+ob_start();
 echo str_pad('',4096)."\n";
 
 $y = 0;
 //Currently used as printer, will store data in future.
 function callback_functn($response, $url, $request_info, $user_data, $time) {
-    echo 'hi';
     if ($request_info['http_code'] == '200') {
     } else {
         $GLOBALS['y']++;
@@ -50,10 +55,11 @@ class queque {
             $xURL = "www.$chunkplode[1]";
             $this->RCX->addRequest($xURL, $this->setpost_data, 'callback_functn', $this->setuser_data, $this->setoptions);
             //print_r($this->setoptions);
-            if ($this->preiterate >= 250 || $i >= $this->setiteratethrough - 1) {
+            if ($this->preiterate >= 500 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
-                echo str_pad('',8096)."Executing queue $i --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
-                flush();
+                echo str_pad('',8096)."Executing queue $i ----------------------------------------------------------------------";
+                ob_end_flush();
+                ob_flush();
                 //RCX is blocking during execution.
                 $this->RCX->execute();
                 echo '<br>';
@@ -81,4 +87,5 @@ $time = round($time_end - $time_start, 4);
 echo 'Errors: ', $GLOBALS['y'], '<br>';
 echo "$time seconds\n";
 ob_end_flush();
+ob_flush();
 ?>
