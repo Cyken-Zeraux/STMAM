@@ -8,13 +8,13 @@ require('../vendor/autoload.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('zlib.output_compression', 0);
-ini_set('output_buffering', 0);
+ob_implicit_flush(true);
 set_time_limit(0);
 require_once(dirname(__FILE__)."/rollingcurlx.class.php");
 $time_start = microtime(true);
 
 ob_start();
-echo str_pad('',4096)."\n";
+echo str_pad(' ',900)."-------------------------------------------------";
 
 $y = 0;
 //Currently used as printer, will store data in future.
@@ -57,7 +57,7 @@ class queque {
             //print_r($this->setoptions);
             if ($this->preiterate >= 500 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
-                echo str_pad('',8096)."Executing queue $i ----------------------------------------------------------------------";
+                echo str_pad(' ',900)."Executing queue $i ----------------------------------------------------------------------";
                 //RCX is blocking during execution.
                 $this->RCX->execute();
                 echo '<br>';
@@ -84,6 +84,5 @@ $time_end = microtime(true);
 $time = round($time_end - $time_start, 4);
 echo 'Errors: ', $GLOBALS['y'], '<br>';
 echo "$time seconds\n";
-ob_end_flush();
-ob_flush();
+
 ?>
