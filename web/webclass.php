@@ -13,7 +13,6 @@ set_time_limit(0);
 require_once(dirname(__FILE__)."/rollingcurlx.class.php");
 $time_start = microtime(true);
 
-ob_start();
 echo str_pad(' ',900)."-------------------------------------------------";
 
 $y = 0;
@@ -84,5 +83,4 @@ $time_end = microtime(true);
 $time = round($time_end - $time_start, 4);
 echo 'Errors: ', $GLOBALS['y'], '<br>';
 echo "$time seconds\n";
-
 ?>
