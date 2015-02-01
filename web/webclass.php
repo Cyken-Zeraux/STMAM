@@ -47,12 +47,11 @@ class queque {
             $chunkplode = explode(',', $suparay[0]);
             unset($suparay);
             $xURL = "www.$chunkplode[1]";
-            echo str_pad('',128).'queued ',$i, ' : ', $xURL, '<br>';
             $this->RCX->addRequest($xURL, $this->setpost_data, 'callback_functn', $this->setuser_data, $this->setoptions);
             //print_r($this->setoptions);
             if ($this->preiterate >= 500 || $i >= $this->setiteratethrough - 1) {
                 $this->preiterate = 0;
-                echo "Executing queue $i";
+                echo str_pad('',4096)."Executing queue $i";
                 ob_flush();
                 flush();
                 //RCX is blocking during execution.
