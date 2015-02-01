@@ -13,6 +13,7 @@ echo str_pad('',4096)."\n";
 $y = 0;
 //Currently used as printer, will store data in future.
 function callback_functn($response, $url, $request_info, $user_data, $time) {
+    echo 'hi';
     if ($request_info['http_code'] == '200') {
     } else {
         $GLOBALS['y']++;
