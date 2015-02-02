@@ -13,7 +13,7 @@ set_time_limit(0);
 require_once(dirname(__FILE__)."/rollingcurlx.class.php");
 $time_start = microtime(true);
 
-echo str_pad(' ',900)."-------------------------------------------------";
+echo str_pad(' ',900)."-------------------------------------------------<br>";
 
 $y = 0;
 //Currently used as printer, will store data in future.
@@ -47,21 +47,21 @@ class queque {
     }
     public function requestcsv() {
         $handle = $this->setfile;
-        for ($i=0; $i < $this->setiteratethrough; $i++) {
+        for ($i=1; $i < $this->setiteratethrough + 1; $i++) {
             $suparay = array(fgets($handle,$this->chunk_size),&$handle);
             $chunkplode = explode(',', $suparay[0]);
             unset($suparay);
             $xURL = "www.$chunkplode[1]";
             $this->RCX->addRequest($xURL, $this->setpost_data, 'callback_functn', $this->setuser_data, $this->setoptions);
             //print_r($this->setoptions);
-            if ($this->preiterate >= 500 || $i >= $this->setiteratethrough - 1) {
+            $this->preiterate++;
+            if ($this->preiterate >= 1000 || $i >= $this->setiteratethrough) {
                 $this->preiterate = 0;
-                echo str_pad(' ',900)."Executing queue $i ----------------------------------------------------------------------";
+                echo str_pad(' ',4096)."Executing queue: $i";
                 //RCX is blocking during execution.
                 $this->RCX->execute();
                 echo '<br>';
             } else {
-                $this->preiterate++;
             }
         }
     }
@@ -71,7 +71,7 @@ class queque {
 }
 $header[] = 'Accept: text/html';
 $header[] = "Accept-Encoding: gzip";
-$RCque = new queque("top-1m.csv", 10000, 14000, $header); //($file, $iterate, $timeout)
+$RCque = new queque("top-1m.csv", 10000, 16000, $header); //($file, $iterate, $timeout)
 $timeouty = 50000;
 $RCque->setuser_data = ['foo', 'bar'];
 $RCque->agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36';
