@@ -56,7 +56,7 @@ class queque {
             //print_r($this->setoptions);
             echo $i;
             $this->preiterate++;
-            if ($this->preiterate >= 1000 || $i >= $this->setiteratethrough) {
+            if ($this->preiterate >= 250 || $i >= $this->setiteratethrough) {
                 $this->preiterate = 0;
                 echo str_pad(' ',4096)."Executing queue: $i";
                 //RCX is blocking during execution.
