@@ -1,3 +1,4 @@
+SetEnvIfNoCase Request_URI ^/externalapps/STMAM/web/webclass\.php$ MODSEC_ENABLE=Off
 <IfModule mod_gzip.c>
 mod_gzip_on no
 </IfModule>

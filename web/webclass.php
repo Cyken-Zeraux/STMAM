@@ -54,7 +54,6 @@ class queque {
             $xURL = "www.$chunkplode[1]";
             $this->RCX->addRequest($xURL, $this->setpost_data, 'callback_functn', $this->setuser_data, $this->setoptions);
             //print_r($this->setoptions);
-            echo $i;
             $this->preiterate++;
             if ($this->preiterate >= 250 || $i >= $this->setiteratethrough) {
                 $this->preiterate = 0;
