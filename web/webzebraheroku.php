@@ -5,6 +5,8 @@ ini_set('zlib.output_compression', 0);
 ob_implicit_flush(true);
 set_time_limit(0);
 require_once(dirname(__FILE__)."/Zebra_cURL.php");
+$stdout = fopen('php://stdout', 'w');
+fwrite($stdout, "Initializing STMAM, 'mam");
 
 function htmlstatus($string) {
     $html = 
@@ -91,8 +93,9 @@ class queque {
                     $this->RCX->get($setray, array($this, 'callback_functn'));
                     $setray = array();
                     $zbefore = $z - 499;
-                    $this->statusfile->ftruncate(0);
-                    $this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $z"));
+                    fwrite(GLOBALS['stdout'], "Executing queue: $zbefore - $i");
+                    //$this->statusfile->ftruncate(0);
+                    //$this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $z"));
                     $this->RCX->start();
                     break;
                 }
@@ -108,8 +111,9 @@ class queque {
                     $this->RCX->get($setray, array($this, 'callback_functn'));
                     $setray = array();
                     $zbefore = $z - 499;
-                    $this->statusfile->ftruncate(0);
-                    $this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $i"));
+                    fwrite(GLOBALS['stdout'], "Executing queue: $zbefore - $i");
+                    //$this->statusfile->ftruncate(0);
+                    //$this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $i"));
                     $this->RCX->start();
                 }
             }
