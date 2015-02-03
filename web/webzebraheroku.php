@@ -76,7 +76,7 @@ class queque {
         } else {
             $this->curlcode++;;
         }
-        $this->writefile->fputcsv(array($url, $connect_time, convert($size_download), convert($speed_download), $primary_ip, $content_type, $namelookup_time));
+        $this->writefile->fputcsv(array($url, $connect_time, $size_download, $speed_download, $primary_ip, $content_type, $namelookup_time));
         unset($result);
     }
     public function requestcsv($start, $setiteratethrough) {
@@ -93,7 +93,7 @@ class queque {
                     $this->RCX->get($setray, array($this, 'callback_functn'));
                     $setray = array();
                     $zbefore = $z - 499;
-                    fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i");
+                    fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i\n");
                     //$this->statusfile->ftruncate(0);
                     //$this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $z"));
                     $this->RCX->start();
@@ -111,7 +111,7 @@ class queque {
                     $this->RCX->get($setray, array($this, 'callback_functn'));
                     $setray = array();
                     $zbefore = $z - 499;
-                    fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i");
+                    fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i\n");
                     //$this->statusfile->ftruncate(0);
                     //$this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $i"));
                     $this->RCX->start();
