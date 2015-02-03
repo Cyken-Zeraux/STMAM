@@ -45,9 +45,9 @@ class queque {
     public function __construct($file, $outputfile, $statfile) {
         $this->time_start = microtime(true);
         echo $_SERVER["DOCUMENT_ROOT"].$outputfile;
-        $this->setfile = new SplFileObject($_SERVER["DOCUMENT_ROOT"].$file);
-        $this->writefile = new SplFileObject($_SERVER["DOCUMENT_ROOT"].$outputfile, "w");
-        $this->statusfile = new SplFileObject($_SERVER["DOCUMENT_ROOT"].$statfile, "w");
+        $this->setfile = new SplFileObject($_SERVER["DOCUMENT_ROOT"].'web/'.$file);
+        $this->writefile = new SplFileObject($_SERVER["DOCUMENT_ROOT"].'web/'.$outputfile, "w");
+        $this->statusfile = new SplFileObject($_SERVER["DOCUMENT_ROOT"].'web/'.$statfile, "w");
         $this->setfile->READ_CSV = true;
         $this->RCX = new Zebra_cURL();
         $this->RCX->queue();
