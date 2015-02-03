@@ -6,8 +6,9 @@ ob_implicit_flush(true);
 set_time_limit(0);
 require_once(dirname(__FILE__)."/Zebra_cURL.php");
 $stdout = fopen('php://stdout', 'w');
-fwrite($stdout, "Initializing STMAM, 'mam\n");
-
+//fwrite($stdout, "Initializing STMAM, 'mam\n");
+echo str_pad(' ',4096)."-------------------------------------------------<br>";
+echo str_pad(' ',4096)."Initializing STMAM, 'mam";
 function htmlstatus($string) {
     $html = 
         "<html>
@@ -45,6 +46,7 @@ class queque {
         $this->time_start = microtime(true);
         $this->setfile = new SplFileObject(dirname(__FILE__).$file);
         $this->writefile = new SplFileObject(dirname(__FILE__).$outputfile, "w");
+        echo dirname(__FILE__).$outputfile;
         $this->statusfile = new SplFileObject(dirname(__FILE__).$statfile, "w");
         $this->setfile->READ_CSV = true;
         $this->RCX = new Zebra_cURL();
@@ -93,9 +95,9 @@ class queque {
                     $this->RCX->get($setray, array($this, 'callback_functn'));
                     $setray = array();
                     $zbefore = $z - 499;
-                    fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i\n");
-                    //$this->statusfile->ftruncate(0);
-                    //$this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $z"));
+                    //fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i\n");
+                    $this->statusfile->ftruncate(0);
+                    $this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $z"));
                     $this->RCX->start();
                     break;
                 }
@@ -111,9 +113,9 @@ class queque {
                     $this->RCX->get($setray, array($this, 'callback_functn'));
                     $setray = array();
                     $zbefore = $z - 499;
-                    fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i\n");
-                    //$this->statusfile->ftruncate(0);
-                    //$this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $i"));
+                    //fwrite($GLOBALS['stdout'], "Executing queue: $zbefore - $i\n");
+                    $this->statusfile->ftruncate(0);
+                    $this->statusfile->fwrite(htmlstatus("Executing queue: $zbefore - $i"));
                     $this->RCX->start();
                 }
             }
