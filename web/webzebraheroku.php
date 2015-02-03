@@ -43,9 +43,9 @@ class queque {
     
     public function __construct($file, $outputfile, $statfile) {
         $this->time_start = microtime(true);
-        $this->setfile = new SplFileObject(getcwd().$file);
-        $this->writefile = new SplFileObject(getcwd().$outputfile, "w");
-        $this->statusfile = new SplFileObject(getcwd().$statfile, "w");
+        $this->setfile = new SplFileObject($_SERVER["PHP_SELF"].$file);
+        $this->writefile = new SplFileObject($_SERVER["PHP_SELF"].$outputfile, "w");
+        $this->statusfile = new SplFileObject($_SERVER["PHP_SELF"].$statfile, "w");
         $this->setfile->READ_CSV = true;
         $this->RCX = new Zebra_cURL();
         $this->RCX->queue();
